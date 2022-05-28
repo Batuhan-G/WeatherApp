@@ -6,6 +6,4 @@ data class ForecastDay (
     val date: String,
     val day: Day,
     val astro: Astro,
-
-
 ): Serializable
