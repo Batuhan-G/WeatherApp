@@ -19,9 +19,11 @@ import java.time.format.DateTimeFormatter
 
 class HomeViewModel: ViewModel() {
 
-    private val _currentCity = MutableLiveData<MutableList<String>>()
-    val currentCity :LiveData<MutableList<String>> get() = _currentCity
+    val cities = mutableListOf(
+        "London", "Istanbul", "Izmir", "Madrid", "Ankara"
+    )
 
+    private val _currentCity = MutableLiveData("")
 
     private val _icons = MutableLiveData<MutableList<String>>()
     val icons :LiveData<MutableList<String>> get() = _icons
@@ -47,11 +49,16 @@ class HomeViewModel: ViewModel() {
     private val _hideProgressDialog = MutableLiveData<Boolean>()
     val hideProgressDialog :LiveData<Boolean> get() = _hideProgressDialog
 
-    private val _showCustomProgressDialog = MutableLiveData<Boolean>()
-    val showCustomProgressDialog :LiveData<Boolean> get() = _showCustomProgressDialog
+    private val _showCustomProgressDialog = MutableLiveData<Boolean?>()
+    val showCustomProgressDialog :LiveData<Boolean?> get() = _showCustomProgressDialog
 
-    private val _showSnackbar = MutableLiveData<Boolean>()
-    val showSnackbar :LiveData<Boolean> get() = _showSnackbar
+
+    fun setCurrentCity(city: String) {
+        _currentCity.value = city
+    }
+    fun setShowCustomDialog(dialog:Boolean?) {
+        _showCustomProgressDialog.value = dialog
+    }
 
     private fun setupUI(weatherList: WeatherResponse){
 
@@ -104,8 +111,7 @@ class HomeViewModel: ViewModel() {
             .create(WeatherService::class.java)
 
         val listCall: Call<WeatherResponse> = service.getWeather(
-
-            latitude, longitude, Constants.METRIC_UNIT, Constants.APP_ID
+            _currentCity.value!!,latitude, longitude, Constants.METRIC_UNIT, Constants.APP_ID
         )
 
         _showCustomProgressDialog.postValue(true)

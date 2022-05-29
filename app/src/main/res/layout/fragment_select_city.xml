@@ -14,22 +14,22 @@
         tools:context=".SelectCityFragment">
 
         <TextView
-            android:id="@+id/currentCity"
-            android:layout_width="wrap_content"
+            android:id="@+id/cityInfoTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary_text_color"
-            android:textSize="22sp"
-            android:fontFamily="@font/roboto"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="60dp"
             android:layout_marginStart="20dp"
-            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/cityInfoText"
+            android:textColor="@color/primary_text_color"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Current City" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -42,11 +42,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentCity"
+            app:layout_constraintTop_toBottomOf="@+id/cityInfoTextView"
             app:startIconDrawable="@drawable/add_location_icon"
             app:startIconTint="@color/primary_text_color">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/cityText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weather App</string>
+    <string name="app_name">Hava Durumu</string>
     <string name="please_wait">Lütfen bekleyin…</string>
-    <string name="feels">Hissedilen</string>
-    <string name="rain">Yağmur</string>
+    <string name="feels">His</string>
+    <string name="rain">Yağış</string>
     <string name="air_quality">Hava Kalitesi</string>
     <string name="pm10">pm10</string>
     <string name="so2">so2</string>
@@ -19,4 +19,11 @@
     <string name="tempOther">%.0f°</string>
     <string name="select">Seç</string>
     <string name="select_a_city">Şehir Seç</string>
+    <string name="cityInfoText">Hava durumunu görüntülemek istediğiniz şehri seçiniz</string>
+    <string name="goToSettings">Ayarlara Git</string>
+    <string name="permission_alert">Bu özellik için gereken izinleri kapatmış gibi görünüyorsunuz. Uygulama Ayarları altında etkinleştirilebilir.</string>
+    <string name="cancel">İptal</string>
+    <string name="no_internet_connection">İnternet bağlantısı yok.</string>
+    <string name="lcoation_permission">Konum iznini reddettiniz. Uygulamanın çalışması için zorunlu olduğu için lütfen bunları etkinleştirin</string>
+    <string name="location_provider">Lütfen konum sağlayıcınızı açın.</string>
 </resources>

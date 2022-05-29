@@ -14,8 +14,6 @@ object Constants {
         val connectivityManager = context.
         getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        // Checking version, if new phone or version, activeNetwork doesn't exist return false
-        //and this network to check capabilities and if it is null return false
         val network = connectivityManager.activeNetwork ?: return false
         val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 
@@ -25,6 +23,5 @@ object Constants {
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }
-
     }
 }
