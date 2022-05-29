@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="please_wait">Lütfen bekleyin…</string>
+    <string name="feels">Hissedilen</string>
+    <string name="rain">Yağmur</string>
+    <string name="air_quality">Hava Kalitesi</string>
+    <string name="pm10">pm10</string>
+    <string name="so2">so2</string>
+    <string name="todo">TODO</string>
+    <string name="refresh">Yenile</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="homePage">Ana Sayfa</string>
+    <string name="select_city">Şehir Seç</string>
+    <string name="so2_value">%.1f</string>
+    <string name="pm10_value">%.1f</string>
+    <string name="max_min_temp">%.0f°/%.0f°</string>
+    <string name="temp">%s°</string>
+    <string name="tempOther">%.0f°</string>
+    <string name="select">Seç</string>
+    <string name="select_a_city">Şehir Seç</string>
+</resources>
