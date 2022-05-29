@@ -9,14 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.batuhangoren.weatherapp.HomeFragment"
         android:label="@string/homePage"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_selectCityFragment"
+            app:destination="@id/selectCityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectCityFragment"
         android:name="com.batuhangoren.weatherapp.SelectCityFragment"
         android:label="@string/select_city"
         tools:layout="@layout/fragment_select_city" >
-        <argument
-            android:name="cityName"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_selectCityFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -18,4 +18,11 @@
     <string name="tempOther">%.0f°</string>
     <string name="select">Select</string>
     <string name="select_a_city">Select a city</string>
+    <string name="cityInfoText">Select the city where you want to display the weather</string>
+    <string name="goToSettings">Go to SETTINGS</string>
+    <string name="permission_alert">It looks like you have turned off permissions required for this feature. It can be enable under Application Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_internet_connection">No internet connection available.</string>
+    <string name="lcoation_permission">You have denied location permission. Please enable them as it is mandatory for the app to work</string>
+    <string name="location_provider">Please turn on your location provider.</string>
 </resources>
