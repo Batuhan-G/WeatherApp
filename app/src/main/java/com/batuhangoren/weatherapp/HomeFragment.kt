@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.executePendingBindings()
+        observe()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         if(!isLocationEnabled()){
@@ -106,6 +107,18 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun observe(){
+        viewModel.icons.observe(viewLifecycleOwner){
+            it?.let {
+                if (it.isNotEmpty()){
+                    Picasso.get().load(it[0]).into(binding.weather0Icon)
+                    Picasso.get().load(it[1]).into(binding.weather1Icon)
+                    Picasso.get().load(it[2]).into(binding.weather2Icon)
+                }
+            }
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -206,82 +219,6 @@ class HomeFragment : Fragment() {
         if (mProgressDialog != null){
             mProgressDialog!!.dismiss()
         }
-    }
-
-
-    private fun setupUI(weatherList: WeatherResponse){
-        val icons: HashMap<Int, String> = hashMapOf()
-        val dates: HashMap<Int, String> = hashMapOf()
-        val airTypes: HashMap<Int, String> = hashMapOf()
-        val tempsOfOtherDays: HashMap<Int, Double> = hashMapOf()
-        val rains: HashMap<Int, String> = hashMapOf()
-        val winds:HashMap<Int, String> = hashMapOf()
-        var counter = 0
-        for(i in weatherList.forecast.forecastday){
-            Log.i("Weather Name",weatherList.forecast.toString())
-            icons[counter] = i.day.condition.icon
-            dates[counter] = i.date
-            tempsOfOtherDays[counter] = i.day.avgtemp_c
-            airTypes[counter] = i.day.condition.text
-            rains[counter] = i.day.daily_chance_of_rain.toString()+"%"
-            winds[counter] = i.day.maxwind_kph.toString()+"km/h"
-            dayConverter(i, dates, counter)
-            counter++
-        }
-
-        printIcons(icons, binding.weather0Icon,binding.weather1Icon, binding.weather2Icon)
-
-        binding.date0Text.text = dates[0]
-        binding.date1Text.text = dates[1]
-        binding.date2Text.text = dates[2]
-
-        binding.rain0Text.text = rains[0]
-        binding.rain1Text.text = rains[1]
-        binding.rain2Text.text = rains[2]
-
-        binding.airTypeText.text = airTypes[0]
-        binding.airType1Text.text = airTypes[1]
-        binding.airType2Text.text = airTypes[2]
-
-        binding.tempC0Text.text= weatherList.current.temp_c.toString()+"°c"
-        val temp1 = String.format("%.0f",tempsOfOtherDays[1])+"°c"
-        val temp2 = String.format("%.0f",tempsOfOtherDays[2])+"°c"
-        binding.tempC1Text.text = temp1
-        binding.tempC2Text.text = temp2
-
-        binding.windy1Text.text = winds[1]
-        binding.windy2Text.text = winds[2]
-
-        binding.cityText.text = weatherList.location.name
-
-        binding.sunRiseText.text = weatherList.forecast.forecastday[0].astro.sunrise
-        binding.sunSetText.text = weatherList.forecast.forecastday[0].astro.sunset
-        binding.humidityText.text = weatherList.current.humidity.toString()
-        binding.windyText.text = weatherList.current.wind_kph.toString()+"km/h"
-        binding.maxMinTemp0Text.text = weatherList.forecast.forecastday[0].day.maxtemp_c.toString()+"°c/"+weatherList.forecast.forecastday[0].day.mintemp_c.toString()+"°c"
-        binding.feelsText.text = weatherList.current.feelslike_c.toString()
-
-        val so2 = String.format("%.1f",weatherList.current.air_quality.so2)
-        val pm10 = String.format("%.1f",weatherList.current.air_quality.pm10)
-        binding.so2Text.text = so2
-        binding.pm10Text.text = pm10
-
-    }
-
-    private fun printIcons(icons: HashMap<Int, String>, weather0: ImageView, weather1: ImageView, weather2: ImageView) {
-        Picasso.get().load("http:${icons[0]}").into(weather0)
-        Picasso.get().load("http:${icons[1]}").into(weather1)
-        Picasso.get().load("http:${icons[2]}").into(weather2)
-    }
-
-    private fun dayConverter(i: ForecastDay, hashMap: HashMap<Int, String>, counter: Int) {
-        val day: DateTimeFormatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        } else {
-            TODO("VERSION.SDK_INT < O")
-        }
-        val local: LocalDate = LocalDate.parse(i.date, day)
-        hashMap[counter] = local.dayOfWeek.toString()
     }
 
 }

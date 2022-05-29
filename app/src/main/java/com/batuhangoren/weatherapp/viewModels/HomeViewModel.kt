@@ -19,6 +19,10 @@ import java.time.format.DateTimeFormatter
 
 class HomeViewModel: ViewModel() {
 
+    private val _currentCity = MutableLiveData<MutableList<String>>()
+    val currentCity :LiveData<MutableList<String>> get() = _currentCity
+
+
     private val _icons = MutableLiveData<MutableList<String>>()
     val icons :LiveData<MutableList<String>> get() = _icons
 
@@ -62,13 +66,12 @@ class HomeViewModel: ViewModel() {
             for(i in weatherList.forecast.forecastday){
 
             Log.i("Weather Name",weatherList.forecast.toString())
-                icons.add(counter, i.day.condition.icon)
-            //_icons.value?.put(counter, i.day.condition.icon)
+                icons.add(counter, "http:${i.day.condition.icon}")
             datesList.add(counter, i.date)
             rains.add(counter, i.day.daily_chance_of_rain.toString()+"%")
             tempsOfOtherDays.add(counter, i.day.avgtemp_c)
             airTypes.add(counter,i.day.condition.text)
-            windys.add(counter, i.day.maxwind_kph.toString()+"km/h")
+            windys.add(counter, i.day.maxwind_kph.toString())
             dayConverter(i, datesList, counter)
             counter++
         }
@@ -78,44 +81,6 @@ class HomeViewModel: ViewModel() {
         _icons.value = icons
         _rains.value = rains
         _winds.value = windys
-
-//        printIcons(icons, binding.weather0Icon,binding.weather1Icon, binding.weather2Icon)
-//
-//        binding.date0Text.text = dates[0]
-//        binding.date1Text.text = dates[1]
-//        binding.date2Text.text = dates[2]
-//
-//        binding.rain0Text.text = rains[0]
-//        binding.rain1Text.text = rains[1]
-//        binding.rain2Text.text = rains[2]
-//
-//        binding.airTypeText.text = airTypes[0]
-//        binding.airType1Text.text = airTypes[1]
-//        binding.airType2Text.text = airTypes[2]
-//
-//        binding.tempC0Text.text= weatherList.current.temp_c.toString()+"°c"
-//        val temp1 = String.format("%.0f",tempsOfOtherDays[1])+"°c"
-//        val temp2 = String.format("%.0f",tempsOfOtherDays[2])+"°c"
-//        binding.tempC1Text.text = temp1
-//        binding.tempC2Text.text = temp2
-//
-//        binding.windy1Text.text = winds[1]
-//        binding.windy2Text.text = winds[2]
-//
-//        binding.cityText.text = weatherList.location.name
-//
-//        binding.sunRiseText.text = weatherList.forecast.forecastday[0].astro.sunrise
-//        binding.sunSetText.text = weatherList.forecast.forecastday[0].astro.sunset
-//        binding.humidityText.text = weatherList.current.humidity.toString()
-//        binding.windyText.text = weatherList.current.wind_kph.toString()+"km/h"
-//        binding.maxMinTemp0Text.text = weatherList.forecast.forecastday[0].day.maxtemp_c.toString()+"°c/"+weatherList.forecast.forecastday[0].day.mintemp_c.toString()+"°c"
-//        binding.feelsText.text = weatherList.current.feelslike_c.toString()
-//
-//        val so2 = String.format("%.1f",weatherList.current.air_quality.so2)
-//        val pm10 = String.format("%.1f",weatherList.current.air_quality.pm10)
-//        binding.so2Text.text = so2
-//        binding.pm10Text.text = pm10
-
     }
 
     private fun dayConverter(i: ForecastDay, list: MutableList<String>, counter: Int) {
@@ -143,7 +108,6 @@ class HomeViewModel: ViewModel() {
             latitude, longitude, Constants.METRIC_UNIT, Constants.APP_ID
         )
 
-        // showCustomProgressDialog()
         _showCustomProgressDialog.postValue(true)
 
         listCall.enqueue(object : Callback<WeatherResponse> {
@@ -151,7 +115,6 @@ class HomeViewModel: ViewModel() {
 
                 if(response.isSuccessful){
 
-                    //   hideProgressDialog()
                     _hideProgressDialog.postValue(true)
 
                     _weatherList.value = response.body()
@@ -160,8 +123,7 @@ class HomeViewModel: ViewModel() {
 
                     Log.i("Response Result","${_weatherList.value}")
                 }else{
-                    val rc = response.code()
-                    when(rc){
+                    when(response.code()){
                         400 ->{
                             Log.e("Error 400","Bad Connection")
                         }
@@ -177,7 +139,6 @@ class HomeViewModel: ViewModel() {
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
 
                 Log.e("Error",t.message.toString())
-                // hideProgressDialog()
                 _hideProgressDialog.postValue(true)
             }
         })

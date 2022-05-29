@@ -54,6 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:layout_toStartOf="@+id/date0_text"
                         android:layout_toEndOf="@+id/locationView"
                         android:fontFamily="@font/roboto"
                         android:text="@{viewModel.weatherList.location.name}"
@@ -67,6 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:text="@{viewModel.dates.get(0)}"
@@ -78,22 +80,22 @@
                         android:id="@+id/air_type_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/weather0_icon"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/roboto"
                         android:text="@{viewModel.airTypes.get(0)}"
                         android:textColor="@color/primary_text_color"
-                        android:textSize="25sp"
-                        android:textStyle="bold" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:id="@+id/temp_c0_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/max_min_temp0_text"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="10dp"
                         android:fontFamily="@font/roboto"
-                        android:text="@{String.valueOf(viewModel.weatherList.current.temp_c)}"
+                        android:text="@{@string/temp(viewModel.weatherList.current.temp_c)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="45sp"
                         android:textStyle="bold" />
@@ -104,21 +106,21 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginBottom="17dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="40dp"
                         android:fontFamily="@font/roboto"
-                        android:text="@{String.valueOf(viewModel.weatherList.forecast.forecastday.get(0).day.maxtemp_c)}"
+                        android:text="@{@string/max_min_temp(viewModel.weatherList.forecast.forecastday.get(0).day.mintemp_c, viewModel.weatherList.forecast.forecastday.get(0).day.maxtemp_c)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
                         tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:id="@+id/weather0_icon"
-                        android:layout_width="120dp"
-                        android:layout_height="140dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:layout_above="@+id/air_type_text"
                         android:layout_centerInParent="true"
                         android:contentDescription="@string/todo"
-                        android:src="@{viewModel.weatherList.forecast.forecastday.get(0).day.condition.icon}"
                         tools:ignore="ImageContrastCheck" />
 
                 </RelativeLayout>
@@ -136,106 +138,111 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView1">
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:background="@color/card_view_background_color">
 
                     <ImageView
                         android:id="@+id/sunrise_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
                         android:contentDescription="@string/todo"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/sun_rise_icon" />
+                        android:src="@drawable/sun_rise_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/sun_rise_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/sunrise_icon"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="@dimen/text_item_margin_left"
                         android:text="@{viewModel.weatherList.forecast.forecastday.get(0).astro.sunrise}"
                         android:textColor="@color/primary_text_color"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/sunrise_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:id="@+id/sun_set_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/sunrise_icon"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="5dp"
                         android:contentDescription="@string/todo"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/sun_set_icon" />
+                        android:src="@drawable/sun_set_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/sun_set_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/sunrise_icon"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="@dimen/text_item_margin_left"
                         android:layout_toEndOf="@+id/sun_set_icon"
                         android:text="@{viewModel.weatherList.forecast.forecastday.get(0).astro.sunset}"
                         android:textColor="@color/primary_text_color"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/sun_set_icon"
                         tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:id="@+id/humidity_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_toStartOf="@+id/windy_text"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/humidity_icon" />
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/humidity_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/windy0_icon" />
 
                     <TextView
                         android:id="@+id/humidity_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toEndOf="@+id/humidity_icon"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:text="@{String.valueOf(viewModel.weatherList.current.humidity)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:id="@+id/windy0_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/humidity_icon"
-                        android:layout_marginEnd="10dp"
-                        android:layout_toStartOf="@+id/windy_text"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/windy_icon" />
+                        android:src="@drawable/windy_icon"
+                        app:layout_constraintEnd_toStartOf="@+id/windy_text"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/windy_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/humidity_text"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:text="@{String.valueOf(viewModel.weatherList.current.wind_kph)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextContrastCheck" />
 
-                </RelativeLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -315,7 +322,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="11dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:fontFamily="@font/roboto"
                         android:text="@string/air_quality"
                         android:textColor="@color/primary_text_color"
@@ -329,7 +336,7 @@
                         android:layout_width="2dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="13dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:background="@color/primary_text_color"
                         app:layout_constraintEnd_toStartOf="@+id/textView16"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -338,7 +345,7 @@
                         android:id="@+id/pm10_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="19dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:layout_marginBottom="16dp"
                         android:text="@{@string/pm10_value(viewModel.weatherList.current.air_quality.pm10)}"
                         android:textColor="@color/primary_text_color"
@@ -352,7 +359,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="29dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:text="@{@string/so2_value(viewModel.weatherList.current.air_quality.pm10)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
@@ -364,7 +371,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="29dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/roboto"
                         android:text="@string/pm10"
@@ -378,7 +385,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="29dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:fontFamily="@font/roboto"
                         android:text="@string/so2"
                         android:textColor="@color/primary_text_color"
@@ -399,6 +406,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto"
                 android:text="@{viewModel.dates.get(1)}"
                 android:textColor="@color/primary_text_color"
                 android:textSize="16sp"
@@ -430,9 +438,9 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="23dp"
-                        android:text="@{String.valueOf(viewModel.tempsOfOtherDays.get(1))}"
+                        android:text="@{@string/tempOther(viewModel.tempsOfOtherDays.get(1))}"
                         android:textColor="@color/primary_text_color"
-                        android:textSize="32sp"
+                        android:textSize="28sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -444,29 +452,15 @@
                         android:layout_marginStart="33dp"
                         android:layout_marginTop="24dp"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_launcher_background"
                         app:layout_constraintStart_toEndOf="@+id/temp_c1_text"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ImageContrastCheck" />
 
                     <TextView
-                        android:id="@+id/air_type1_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="32dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@{viewModel.airTypes.get(1)}"
-                        android:textColor="@color/primary_text_color"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/weather1_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
                         android:id="@+id/rain1_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="19dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:layout_marginBottom="16dp"
                         android:text="@{viewModel.rains.get(1)}"
                         android:textColor="@color/primary_text_color"
@@ -479,7 +473,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="15dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/windy_icon"
                         app:layout_constraintEnd_toStartOf="@+id/windy1_text"
@@ -490,18 +484,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
                         android:text="@{viewModel.winds.get(1)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/rain1_text"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="39dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/roboto"
                         android:text="@string/rain"
@@ -510,9 +503,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/rain1_text"
                         tools:ignore="TextContrastCheck" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             </androidx.cardview.widget.CardView>
 
@@ -522,6 +513,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto"
                 android:text="@{viewModel.dates.get(2)}"
                 android:textColor="@color/primary_text_color"
                 android:textSize="16sp"
@@ -551,9 +543,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:text="@{String.valueOf(viewModel.tempsOfOtherDays.get(2))}"
+                        android:text="@{@string/tempOther(viewModel.tempsOfOtherDays.get(2))}"
                         android:textColor="@color/primary_text_color"
-                        android:textSize="32sp"
+                        android:textSize="28sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -564,29 +556,15 @@
                         android:layout_marginStart="33dp"
                         android:layout_marginTop="24dp"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_launcher_background"
                         app:layout_constraintStart_toEndOf="@+id/temp_c2_text"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ImageContrastCheck" />
 
                     <TextView
-                        android:id="@+id/air_type2_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="32dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@{viewModel.airTypes.get(2)}"
-                        android:textColor="@color/primary_text_color"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/weather2_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
                         android:id="@+id/rain2_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="19dp"
+                        android:layout_marginEnd="@dimen/card_view_margin_left"
                         android:layout_marginBottom="16dp"
                         android:text="@{viewModel.rains.get(2)}"
                         android:textColor="@color/primary_text_color"
@@ -599,7 +577,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="15dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/windy_icon"
                         app:layout_constraintEnd_toStartOf="@+id/windy2_text"
@@ -610,18 +588,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
                         android:text="@{viewModel.winds.get(2)}"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/rain2_text"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="39dp"
+                        android:layout_marginEnd="@dimen/text_item_margin_left"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/roboto"
                         android:text="@string/rain"

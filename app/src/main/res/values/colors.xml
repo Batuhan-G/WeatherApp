@@ -9,4 +9,6 @@
     <color name="main_screen_background_color">#0A7FDF</color>
     <color name="primary_text_color">#FFFFFFFF</color>
     <color name="card_view_background_color">#DD0A7FDF</color>
+    <color name="bar_color">#00358F</color>
+
 </resources>
